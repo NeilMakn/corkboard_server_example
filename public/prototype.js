@@ -23,6 +23,22 @@ $(document).ready(function() {
     });
   };
 
+  Note.prototype.fetchAll = function (){
+    $.ajax({
+      url: this.baseUrl
+      dataType: 'json',
+      type: 'GET',
+      context: this,
+      success: function(data){
+        console.log(data);
+
+      },
+      error: function(){}
+    });
+
+
+  };
+
   Note.prototype.save = function(newSubject,newContent) {
     $.ajax({
       url: this.baseUrl + this.id,
@@ -57,14 +73,6 @@ $(document).ready(function() {
     });
   };
 
-  var a = new Note(2);
-    a.fetch();
-  var b = new Note(4);
-    b.save("Desert","Sand fight!");
-    b.fetch();
-  var c  = new Note(8);
-    c.create("Ocean","Shark fight!");
-    c.fetch();
 
 
 
