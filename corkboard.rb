@@ -78,19 +78,20 @@ get '/note/:id' do
   return [200, {'Content-Type' => 'application/json'}, [jsonp?(note.to_json)]]
 end
 
-# get all notes to return
-get '/note/' do
+# download all notes
+
+get '/note' do
   note = Note.all.to_a
 
   if note.nil?
-    return [404, {'Content-Type' => 'application/json'}, ['']]
+    return [404, {'Content-Type' => 'application/json'}, ['Does not exist']]
   end
 
   return [200, {'Content-Type' => 'application/json'}, [jsonp?(note.to_json)]]
 end
 
 # allows data INTO the database via 'PUT' statements    ##########
-put '/note' do
+put '/note/' do
   # Request.body.read is destructive, make sure you don't use a puts here.
   data = JSON.parse(request.body.read)
 
